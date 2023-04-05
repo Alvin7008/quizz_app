@@ -3,33 +3,41 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  void answerQuestion() {
+    questionIndex = questionIndex + 1;
+    print('Answer chosen');
+  }
+
+  var questionIndex = 0;
+
+  var question = [
+    'What\'s your favorite color?', //the backslash is used to ignore the single quote '.
+    'What\'s your fovorite animal?',
+  ];
+
   @override
   Widget build(BuildContext context) {
-    var question = [
-      'What\'s your favorite color?', //the backslash is used to ignore the single quote '.
-      'What\'s your fovorite animal?',
-    ];
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Quiz App'),
         ),
         body: Column(
-          // ignore: prefer_const_literals_to_create_immutables
           children: [
-            const Text('Question 1'),
-            const ElevatedButton(
-              onPressed: null,
-              child: Text('Answer 1'),
+            Text(
+                // question.elementAt(questionIndex), use any of this method to call list data
+                question[questionIndex]),
+            ElevatedButton(
+              onPressed: answerQuestion,
+              child: const Text('Answer 1'),
             ),
-            const ElevatedButton(
-              onPressed: null,
-              child: Text('Answer 2'),
+            ElevatedButton(
+              onPressed: answerQuestion,
+              child: const Text('Answer 2'),
             ),
-            const ElevatedButton(
-              onPressed: null,
-              child: Text('Answer 3'),
+            ElevatedButton(
+              onPressed: answerQuestion,
+              child: const Text('Answer 3'),
             ),
           ],
         ),

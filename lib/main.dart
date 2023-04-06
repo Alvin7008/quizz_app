@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './question.dart';
 
 void main() => runApp(MyApp());
 
@@ -6,17 +7,18 @@ class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return MyAppState();
+    return _MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
-  void answerQuestion() {
-    questionIndex = questionIndex + 1;
-    print(questionIndex);
+class _MyAppState extends State<MyApp> {
+  void _answerQuestion() {
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+    });
   }
 
-  var questionIndex = 0;
+  var _questionIndex = 0;
 
   var question = [
     'What\'s your favorite color?', //the backslash is used to ignore the single quote '.
@@ -32,19 +34,20 @@ class MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text(
-                // question.elementAt(questionIndex), use any of this method to call list data
-                question[questionIndex]),
+            Question(
+              // question.elementAt(_questionIndex), use any of this method to call list data
+              question[_questionIndex],
+            ),
             ElevatedButton(
-              onPressed: answerQuestion,
+              onPressed: _answerQuestion,
               child: const Text('Answer 1'),
             ),
             ElevatedButton(
-              onPressed: answerQuestion,
+              onPressed: _answerQuestion,
               child: const Text('Answer 2'),
             ),
             ElevatedButton(
-              onPressed: answerQuestion,
+              onPressed: _answerQuestion,
               child: const Text('Answer 3'),
             ),
           ],

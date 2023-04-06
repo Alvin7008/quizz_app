@@ -21,9 +21,112 @@ class _MyAppState extends State<MyApp> {
 
   var _questionIndex = 0;
 
-  var question = [
-    'What\'s your favorite color?', //the backslash is used to ignore the single quote '.
-    'What\'s your fovorite animal?',
+  // var question = [
+  //   'What\'s your favorite color?', //the backslash is used to ignore the single quote '.
+  //   'What\'s your fovorite animal?',
+  // ];
+
+  var questions = [
+    {
+      "question": "What is the capital of France?",
+      "options": ["Berlin", "Paris", "Madrid", "Rome"],
+      "answer": "Paris"
+    },
+    {
+      "question": "What is the largest country in the world?",
+      "options": ["United States", "China", "Russia", "India"],
+      "answer": "Russia"
+    },
+    {
+      "question": "What is the currency of Japan?",
+      "options": ["Yen", "Won", "Baht", "Yuan"],
+      "answer": "Yen"
+    },
+    {
+      "question": "Who is the author of The Great Gatsby?",
+      "options": [
+        "F. Scott Fitzgerald",
+        "Ernest Hemingway",
+        "John Steinbeck",
+        "Toni Morrison"
+      ],
+      "answer": "F. Scott Fitzgerald"
+    },
+    {
+      "question": "What is the capital of Australia?",
+      "options": ["Sydney", "Melbourne", "Canberra", "Brisbane"],
+      "answer": "Canberra"
+    },
+    {
+      "question": "What is the largest ocean in the world?",
+      "options": ["Atlantic", "Arctic", "Indian", "Pacific"],
+      "answer": "Pacific"
+    },
+    {
+      "question": "What is the chemical symbol for gold?",
+      "options": ["Ag", "Au", "Cu", "Fe"],
+      "answer": "Au"
+    },
+    {
+      "question": "What is the smallest planet in our solar system?",
+      "options": ["Mercury", "Venus", "Mars", "Pluto"],
+      "answer": "Mercury"
+    },
+    {
+      "question": "Who painted the Mona Lisa?",
+      "options": [
+        "Leonardo da Vinci",
+        "Vincent van Gogh",
+        "Pablo Picasso",
+        "Michelangelo"
+      ],
+      "answer": "Leonardo da Vinci"
+    },
+    {
+      "question": "What is the national animal of Canada?",
+      "options": ["Beaver", "Moose", "Polar bear", "Bison"],
+      "answer": "Beaver"
+    },
+    {
+      "question": "What is the largest bird in the world?",
+      "options": ["Eagle", "Ostrich", "Flamingo", "Pelican"],
+      "answer": "Ostrich"
+    },
+    {
+      "question": "What is the capital of Egypt?",
+      "options": ["Cairo", "Alexandria", "Luxor", "Aswan"],
+      "answer": "Cairo"
+    },
+    {
+      "question": "Who discovered penicillin?",
+      "options": [
+        "Alexander Fleming",
+        "Marie Curie",
+        "Thomas Edison",
+        "Isaac Newton"
+      ],
+      "answer": "Alexander Fleming"
+    },
+    {
+      "question": "What is the largest desert in the world?",
+      "options": ["Sahara", "Gobi", "Arabian", "Antarctic"],
+      "answer": "Sahara"
+    },
+    {
+      "question": "What is the capital of Brazil?",
+      "options": ["Rio de Janeiro", "Brasília", "São Paulo", "Salvador"],
+      "answer": "Brasília"
+    },
+    {
+      "question": "Who wrote the play Romeo and Juliet?",
+      "options": [
+        "William Shakespeare",
+        "Oscar Wilde",
+        "Samuel Beckett",
+        "Tennessee Williams"
+      ],
+      "answer": "William Shakespeare"
+    },
   ];
 
   @override
@@ -37,11 +140,13 @@ class _MyAppState extends State<MyApp> {
           children: [
             Question(
               // question.elementAt(_questionIndex), use any of this method to call list data
-              question[_questionIndex],
+              questions[_questionIndex]['question'].toString(),
             ),
-            Answer('Answer 1'),
-            Answer('Answer 2'),
-            Answer('Answer 3'),
+            ...(questions[_questionIndex]['options'] as List<String>)
+                .map((answer) {
+              //....spread operator take the  list the pull all the values out of it and add them to surrounding list as individual values
+              return Answer(_answerQuestion, answer);
+            }).toList(),
           ],
         ),
       ),

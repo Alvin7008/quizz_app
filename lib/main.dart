@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,18 +39,9 @@ class _MyAppState extends State<MyApp> {
               // question.elementAt(_questionIndex), use any of this method to call list data
               question[_questionIndex],
             ),
-            ElevatedButton(
-              onPressed: _answerQuestion,
-              child: const Text('Answer 1'),
-            ),
-            ElevatedButton(
-              onPressed: _answerQuestion,
-              child: const Text('Answer 2'),
-            ),
-            ElevatedButton(
-              onPressed: _answerQuestion,
-              child: const Text('Answer 3'),
-            ),
+            Answer('Answer 1'),
+            Answer('Answer 2'),
+            Answer('Answer 3'),
           ],
         ),
       ),

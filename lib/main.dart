@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
+import './result.dart';
+import './quiz.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,9 +13,24 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  void _answerQuestion() {
+  //
+  var _totalScore = 0;
+
+  void _answerQuestion(int score) {
+    // print(" Score " + score.toString());
+    // print("Totalms cr " + _totalScore.toString());
+    _totalScore += score;
+    if (_questionIndex < _questions.length) {
+      setState(() {
+        _questionIndex = _questionIndex + 1;
+      });
+    }
+  }
+
+  void restartGame() {
     setState(() {
-      _questionIndex = _questionIndex + 1;
+      _questionIndex = 0;
+      _totalScore = 0;
     });
   }
 
@@ -26,7 +41,7 @@ class _MyAppState extends State<MyApp> {
   //   'What\'s your fovorite animal?',
   // ];
 
-  var questions = [
+  final _questions = const [
     {
       "question": "What is the capital of France?",
       "options": ["Berlin", "Paris", "Madrid", "Rome"],
@@ -136,19 +151,13 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Quiz App'),
         ),
-        body: Column(
-          children: [
-            Question(
-              // question.elementAt(_questionIndex), use any of this method to call list data
-              questions[_questionIndex]['question'].toString(),
-            ),
-            ...(questions[_questionIndex]['options'] as List<String>)
-                .map((answer) {
-              //....spread operator take the  list the pull all the values out of it and add them to surrounding list as individual values
-              return Answer(_answerQuestion, answer);
-            }).toList(),
-          ],
-        ),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
+              )
+            : Result(_totalScore, restartGame, _questions.length),
       ),
     );
   }
